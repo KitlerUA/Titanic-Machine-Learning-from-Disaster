@@ -7,9 +7,9 @@ currentUnixTime = lambda: int(round(time.time()))
 
 
 def compute(dataSet, dataRes, dataTest, dataTestID):
-    mlp = MLPClassifier(hidden_layer_sizes=(49, ), max_iter=100, alpha=1e-5,
-                        solver='lbfgs', verbose=0, tol=1e-5, random_state=1,
-                        learning_rate='invscaling', learning_rate_init=.1,
+    mlp = MLPClassifier(hidden_layer_sizes=(21, ), max_iter=1000, alpha=1e-5,
+                        solver='sgd', verbose=0, tol=1e-5, random_state=1,
+                        learning_rate='constant', learning_rate_init=.1,
                         activation='tanh')
 
     mlp.fit(dataSet, dataRes)

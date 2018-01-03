@@ -103,7 +103,7 @@ with open('test.csv', newline='\n') as testFile:
         temp.append(sex(row[3]))
         # age
         if row[4] != '':
-            temp.append(int(float(row[4])))
+            temp.append(age(float(row[4])))
         else:
             temp.append(avg)
         # brothers/sisters
