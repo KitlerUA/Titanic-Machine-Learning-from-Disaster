@@ -26,6 +26,28 @@ def location(x):
     }[x]
 
 
+def age(x):
+    if x < 12:
+        return 0
+    elif x < 25:
+        return 1
+    elif x < 35:
+        return 2
+    elif x < 45:
+        return 3
+    return 4
+
+
+def fare(x):
+    if x < 40:
+        return 0
+    if x < 90:
+        return 1
+    if x < 150:
+        return 2
+    return 3
+
+
 with open('train.csv', newline='\n') as trainFile:
     fileReader = csv.reader(trainFile, delimiter=',')
     next(fileReader)
@@ -36,7 +58,7 @@ with open('train.csv', newline='\n') as trainFile:
         temp.append(sex(row[4]))
         # age
         if row[5] != '':
-            temp.append(int(float(row[5])))
+            temp.append(age(int(float(row[5]))))
         else:
             temp.append(0)
         # brothers/sisters
@@ -44,7 +66,7 @@ with open('train.csv', newline='\n') as trainFile:
         # children
         temp.append(int(row[7]))
         # fare
-        temp.append(float(row[9]))
+        temp.append(fare(float(row[9])))
         # port
         temp.append(location(row[11]))
         dataSet.append(temp)
@@ -67,11 +89,7 @@ print(avg)
 # replace zeroes with average
 for row in dataSet:
     if row[2] == 0:
-        if row[1] == 1:
-            row[2] = avg+1
-        else:
-            row[2] = avg-2
-
+        row[2] = avg
 dataTest = []
 dataTestID = []
 
@@ -85,7 +103,7 @@ with open('test.csv', newline='\n') as testFile:
         temp.append(sex(row[3]))
         # age
         if row[4] != '':
-            temp.append(float(row[4]))
+            temp.append(int(float(row[4])))
         else:
             temp.append(avg)
         # brothers/sisters
@@ -94,9 +112,9 @@ with open('test.csv', newline='\n') as testFile:
         temp.append(int(row[6]))
         # fare
         if row[8] == '':
-            temp.append(40.0)
+            temp.append(fare(50))
         else:
-            temp.append(float(row[8]))
+            temp.append(fare(float(row[8])))
         # port
         temp.append(location(row[10]))
         dataTest.append(temp)
